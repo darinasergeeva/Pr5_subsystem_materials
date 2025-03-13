@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using subsystem_materials.Models;
 
 namespace subsystem_materials;
 
-public partial class Materials1Context : DbContext
+public partial class AppContext : DbContext
 {
-    public Materials1Context()
+    public AppContext()
     {
     }
 
-    public Materials1Context(DbContextOptions<Materials1Context> options)
+    public AppContext(DbContextOptions<AppContext> options)
         : base(options)
     {
     }

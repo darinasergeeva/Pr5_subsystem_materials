@@ -32,8 +32,11 @@
             buttonTypeAdd = new Button();
             buttonTypeUpdate = new Button();
             buttonTypeDelete = new Button();
-            panel1 = new Panel();
+            panelFill = new Panel();
+            dataGridViewTypes = new DataGridView();
             flowLayoutPanel1.SuspendLayout();
+            panelFill.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTypes).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -78,12 +81,25 @@
             buttonTypeDelete.Text = "Удалить";
             buttonTypeDelete.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // panelFill
             // 
-            panel1.Location = new Point(476, 352);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(200, 100);
-            panel1.TabIndex = 1;
+            panelFill.Controls.Add(dataGridViewTypes);
+            panelFill.Dock = DockStyle.Fill;
+            panelFill.Location = new Point(0, 80);
+            panelFill.Name = "panelFill";
+            panelFill.Padding = new Padding(10);
+            panelFill.Size = new Size(842, 459);
+            panelFill.TabIndex = 1;
+            // 
+            // dataGridViewTypes
+            // 
+            dataGridViewTypes.BackgroundColor = Color.White;
+            dataGridViewTypes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewTypes.Dock = DockStyle.Fill;
+            dataGridViewTypes.Location = new Point(10, 10);
+            dataGridViewTypes.Name = "dataGridViewTypes";
+            dataGridViewTypes.Size = new Size(822, 439);
+            dataGridViewTypes.TabIndex = 0;
             // 
             // FormMaterialTypes
             // 
@@ -91,13 +107,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(842, 539);
-            Controls.Add(panel1);
+            Controls.Add(panelFill);
             Controls.Add(flowLayoutPanel1);
             Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            Margin = new Padding(5, 5, 5, 5);
+            Margin = new Padding(5);
             Name = "FormMaterialTypes";
             Text = "Типы Материалов";
+            Load += FormMaterialTypes_Load;
             flowLayoutPanel1.ResumeLayout(false);
+            panelFill.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewTypes).EndInit();
             ResumeLayout(false);
         }
 
@@ -107,6 +126,7 @@
         private Button buttonTypeAdd;
         private Button buttonTypeUpdate;
         private Button buttonTypeDelete;
-        private Panel panel1;
+        private Panel panelFill;
+        private DataGridView dataGridViewTypes;
     }
 }
