@@ -15,7 +15,9 @@ public partial class Supplier
 
     public bool IsActive { get; set; }
 
-    public virtual SupplierType IdSupplierTypeNavigation { get; set; } = null!;
+
+    //навигационные свойства
+    public virtual SupplierType SupplierType { get; set; } = null!;
 
     public virtual ICollection<SuppliersMaterial> SuppliersMaterials { get; set; } = new List<SuppliersMaterial>();
 }

@@ -19,7 +19,9 @@ public partial class SuppliersMaterial
 
     public short QualitySupply { get; set; }
 
-    public virtual Material IdMaterialNavigation { get; set; } = null!;
+    //навигационные свойства
 
-    public virtual Supplier IdSupplierNavigation { get; set; } = null!;
+    public virtual Material Material { get; set; } = null!;
+
+    public virtual Supplier Supplier { get; set; } = null!;
 }

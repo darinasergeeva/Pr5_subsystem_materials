@@ -15,7 +15,7 @@ namespace subsystem_materials
     public partial class FormMaterialTypes : Form
     {
 
-        private AppContext db; 
+        private AppContext db;
 
         public FormMaterialTypes()
         {
@@ -27,9 +27,9 @@ namespace subsystem_materials
             base.OnLoad(e);
             this.db = new AppContext();
             this.db.Suppliers.Load();
-            this.dataGridViewTypes.DataSource = this.db.Suppliers.Local.OrderBy(o=>o.NameSupplier).ToList();
+            this.dataGridViewTypes.DataSource = this.db.Suppliers.Local.OrderBy(o => o.NameSupplier).ToList();
             dataGridViewTypes.Columns["id"].Visible = false;
-            dataGridViewTypes.Columns["idSupplierTypeNavigation"].Visible = false;
+            dataGridViewTypes.Columns["SupplierType"].Visible = false;
             dataGridViewTypes.Columns["SuppliersMaterials"].Visible = false;
 
             dataGridViewTypes.Columns["IdSupplierType"].HeaderText = "Тип поставщика";
@@ -41,6 +41,12 @@ namespace subsystem_materials
         private void FormMaterialTypes_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonDeliveryHistory_Click(object sender, EventArgs e)
+        {
+            DeliveryHistory history = new DeliveryHistory(); // Создание новой формы
+            history.Show(); // Показать форму перехода
         }
     }
 }

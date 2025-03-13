@@ -17,7 +17,9 @@ public partial class Material
 
     public string? Image { get; set; }
 
-    public virtual MaterialType IdMaterialTypeNavigation { get; set; } = null!;
+
+    //навигационные свойства
+    public virtual MaterialType MaterialType { get; set; } = null!;
 
     public virtual ICollection<SuppliersMaterial> SuppliersMaterials { get; set; } = new List<SuppliersMaterial>();
 }

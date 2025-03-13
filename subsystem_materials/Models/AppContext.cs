@@ -45,7 +45,7 @@ public partial class AppContext : DbContext
             entity.Property(e => e.Image).HasColumnName("image");
             entity.Property(e => e.NameMaterial).HasColumnName("name_material");
 
-            entity.HasOne(d => d.IdMaterialTypeNavigation).WithMany(p => p.Materials)
+            entity.HasOne(d => d.MaterialType).WithMany(p => p.Materials)
                 .HasForeignKey(d => d.IdMaterialType)
                 .HasConstraintName("materials_id_material_type_fkey");
         });
@@ -72,7 +72,7 @@ public partial class AppContext : DbContext
             entity.Property(e => e.IsActive).HasColumnName("is_active");
             entity.Property(e => e.NameSupplier).HasColumnName("name_supplier");
 
-            entity.HasOne(d => d.IdSupplierTypeNavigation).WithMany(p => p.Suppliers)
+            entity.HasOne(d => d.SupplierType).WithMany(p => p.Suppliers)
                 .HasForeignKey(d => d.IdSupplierType)
                 .HasConstraintName("suppliers_id_supplier_type_fkey");
         });
@@ -103,11 +103,11 @@ public partial class AppContext : DbContext
             entity.Property(e => e.IdSupplier).HasColumnName("id_supplier");
             entity.Property(e => e.QualitySupply).HasColumnName("quality_supply");
 
-            entity.HasOne(d => d.IdMaterialNavigation).WithMany(p => p.SuppliersMaterials)
+            entity.HasOne(d => d.Material).WithMany(p => p.SuppliersMaterials)
                 .HasForeignKey(d => d.IdMaterial)
                 .HasConstraintName("suppliers_materials_id_material_fkey");
 
-            entity.HasOne(d => d.IdSupplierNavigation).WithMany(p => p.SuppliersMaterials)
+            entity.HasOne(d => d.Supplier).WithMany(p => p.SuppliersMaterials)
                 .HasForeignKey(d => d.IdSupplier)
                 .HasConstraintName("suppliers_materials_id_supplier_fkey");
         });

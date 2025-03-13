@@ -34,6 +34,7 @@
             buttonTypeDelete = new Button();
             panelFill = new Panel();
             dataGridViewTypes = new DataGridView();
+            buttonDeliveryHistory = new Button();
             flowLayoutPanel1.SuspendLayout();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewTypes).BeginInit();
@@ -41,14 +42,16 @@
             // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.Controls.Add(buttonTypeAdd);
             flowLayoutPanel1.Controls.Add(buttonTypeUpdate);
             flowLayoutPanel1.Controls.Add(buttonTypeDelete);
+            flowLayoutPanel1.Controls.Add(buttonDeliveryHistory);
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Padding = new Padding(10);
-            flowLayoutPanel1.Size = new Size(842, 80);
+            flowLayoutPanel1.Size = new Size(842, 61);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // buttonTypeAdd
@@ -85,21 +88,36 @@
             // 
             panelFill.Controls.Add(dataGridViewTypes);
             panelFill.Dock = DockStyle.Fill;
-            panelFill.Location = new Point(0, 80);
+            panelFill.Location = new Point(0, 61);
             panelFill.Name = "panelFill";
             panelFill.Padding = new Padding(10);
-            panelFill.Size = new Size(842, 459);
+            panelFill.Size = new Size(842, 478);
             panelFill.TabIndex = 1;
             // 
             // dataGridViewTypes
             // 
+            dataGridViewTypes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewTypes.BackgroundColor = Color.White;
             dataGridViewTypes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewTypes.Dock = DockStyle.Fill;
             dataGridViewTypes.Location = new Point(10, 10);
+            dataGridViewTypes.MultiSelect = false;
             dataGridViewTypes.Name = "dataGridViewTypes";
-            dataGridViewTypes.Size = new Size(822, 439);
+            dataGridViewTypes.ReadOnly = true;
+            dataGridViewTypes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewTypes.Size = new Size(822, 458);
             dataGridViewTypes.TabIndex = 0;
+            // 
+            // buttonDeliveryHistory
+            // 
+            buttonDeliveryHistory.ForeColor = Color.Black;
+            buttonDeliveryHistory.Location = new Point(481, 13);
+            buttonDeliveryHistory.Name = "buttonDeliveryHistory";
+            buttonDeliveryHistory.Size = new Size(182, 35);
+            buttonDeliveryHistory.TabIndex = 3;
+            buttonDeliveryHistory.Text = "История поставок";
+            buttonDeliveryHistory.UseVisualStyleBackColor = true;
+            buttonDeliveryHistory.Click += buttonDeliveryHistory_Click;
             // 
             // FormMaterialTypes
             // 
@@ -118,6 +136,7 @@
             panelFill.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewTypes).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -128,5 +147,6 @@
         private Button buttonTypeDelete;
         private Panel panelFill;
         private DataGridView dataGridViewTypes;
+        private Button buttonDeliveryHistory;
     }
 }

@@ -10,5 +10,7 @@ public partial class MaterialType
 
     public string TypeMaterial { get; set; } = null!;
 
+
+    //навигационные свойства
     public virtual ICollection<Material> Materials { get; set; } = new List<Material>();
 }
