@@ -112,9 +112,57 @@ namespace subsystem_materials
 
         private void buttonTypeUpdate_Click(object sender, EventArgs e)
         {
+            // Проверяем, выбран ли поставщик в DataGridView
+            if (dataGridViewTypes.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Пожалуйста, выберите поставщика для редактирования.");
+                return; // Выходим из метода, если ничего не выбрано
+            }
+
+            // Получаем выбранного поставщика
+            var selectedRow = dataGridViewTypes.SelectedRows[0];
+            int supplierId = (int)selectedRow.Cells["Id"].Value;
+
+            // Загружаем данные выбранного поставщика из базы данных
+            var supplier = db.Suppliers.Find(supplierId);
+            if (supplier == null)
+            {
+                MessageBox.Show("Ошибка: поставщик не найден.");
+                return; // Выходим из метода, если поставщик не найден
+            }
+
+            // Открываем форму редактирования и передаем данные поставщика
+            using (FormAdd formEdit = new FormAdd(supplier))
+            {
+                if (formEdit.ShowDialog(this) == DialogResult.OK)
+                {
+                    // Если пользователь нажал "ОК", сохраняем изменения
+                    supplier.NameSupplier = formEdit.SupplierName; // Обновляем имя
+                    supplier.Inn = formEdit.SupplierInn; // Обновляем ИНН
+                    supplier.IdSupplierType = (short)formEdit.SupplierTypeId; // Обновляем тип поставщика
+                    supplier.IsActive = formEdit.IsCurrentChecked; // Обновляем статус активности
+
+                    // Сохраняем изменения в базе данных
+                    try
+                    {
+                        db.SaveChanges();
+                        MessageBox.Show("Данные поставщика обновлены.");
+                        LoadSuppliers(); // Обновляем список поставщиков
+                    }
+                    catch (DbUpdateException ex)
+                    {
+                        MessageBox.Show($"Ошибка при обновлении данных: {ex.InnerException?.Message ?? ex.Message}");
+                    }
+                }
+            }
+        }
+
+        private void buttonTypeDelete_Click(object sender, EventArgs e)
+        {
 
         }
     }
 }
+
 
 
