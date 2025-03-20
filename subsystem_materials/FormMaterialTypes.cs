@@ -159,7 +159,46 @@ namespace subsystem_materials
 
         private void buttonTypeDelete_Click(object sender, EventArgs e)
         {
+            // Проверяем, выбран ли поставщик в DataGridView
+            if (dataGridViewTypes.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Пожалуйста, выберите поставщика для удаления.");
+                return; // Выходим из метода, если ничего не выбрано
+            }
 
+            // Получаем выбранного поставщика
+            var selectedRow = dataGridViewTypes.SelectedRows[0];
+            int supplierId = (int)selectedRow.Cells["Id"].Value; // Предполагаем, что у вас есть столбец Id
+
+            // Загружаем данные выбранного поставщика из базы данных
+            var supplier = db.Suppliers.Find(supplierId);
+            if (supplier == null)
+            {
+                MessageBox.Show("Ошибка: поставщик не найден.");
+                return; // Выходим из метода, если поставщик не найден
+            }
+
+            // Запрашиваем подтверждение у пользователя
+            var confirmResult = MessageBox.Show("Вы уверены, что хотите удалить этого поставщика?",
+                                                 "Подтверждение удаления",
+                                                 MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                // Удаляем выбранного поставщика из контекста базы данных
+                db.Suppliers.Remove(supplier);
+
+                // Сохраняем изменения в базе данных
+                try
+                {
+                    db.SaveChanges();
+                    MessageBox.Show("Поставщик удален.");
+                    LoadSuppliers(); // Обновляем список поставщиков
+                }
+                catch (DbUpdateException ex)
+                {
+                    MessageBox.Show($"Ошибка при удалении: {ex.InnerException?.Message ?? ex.Message}");
+                }
+            }
         }
     }
 }
