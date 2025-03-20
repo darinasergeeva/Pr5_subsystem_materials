@@ -32,9 +32,9 @@
             buttonTypeAdd = new Button();
             buttonTypeUpdate = new Button();
             buttonTypeDelete = new Button();
+            buttonDeliveryHistory = new Button();
             panelFill = new Panel();
             dataGridViewTypes = new DataGridView();
-            buttonDeliveryHistory = new Button();
             flowLayoutPanel1.SuspendLayout();
             panelFill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewTypes).BeginInit();
@@ -63,6 +63,7 @@
             buttonTypeAdd.TabIndex = 0;
             buttonTypeAdd.Text = "Добавить";
             buttonTypeAdd.UseVisualStyleBackColor = true;
+            buttonTypeAdd.Click += buttonTypeAdd_Click;
             // 
             // buttonTypeUpdate
             // 
@@ -73,6 +74,7 @@
             buttonTypeUpdate.TabIndex = 1;
             buttonTypeUpdate.Text = "Редактировать";
             buttonTypeUpdate.UseVisualStyleBackColor = true;
+            buttonTypeUpdate.Click += buttonTypeUpdate_Click;
             // 
             // buttonTypeDelete
             // 
@@ -83,6 +85,17 @@
             buttonTypeDelete.TabIndex = 2;
             buttonTypeDelete.Text = "Удалить";
             buttonTypeDelete.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeliveryHistory
+            // 
+            buttonDeliveryHistory.ForeColor = Color.Black;
+            buttonDeliveryHistory.Location = new Point(481, 13);
+            buttonDeliveryHistory.Name = "buttonDeliveryHistory";
+            buttonDeliveryHistory.Size = new Size(182, 35);
+            buttonDeliveryHistory.TabIndex = 3;
+            buttonDeliveryHistory.Text = "История поставок";
+            buttonDeliveryHistory.UseVisualStyleBackColor = true;
+            buttonDeliveryHistory.Click += buttonDeliveryHistory_Click;
             // 
             // panelFill
             // 
@@ -107,17 +120,6 @@
             dataGridViewTypes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewTypes.Size = new Size(822, 458);
             dataGridViewTypes.TabIndex = 0;
-            // 
-            // buttonDeliveryHistory
-            // 
-            buttonDeliveryHistory.ForeColor = Color.Black;
-            buttonDeliveryHistory.Location = new Point(481, 13);
-            buttonDeliveryHistory.Name = "buttonDeliveryHistory";
-            buttonDeliveryHistory.Size = new Size(182, 35);
-            buttonDeliveryHistory.TabIndex = 3;
-            buttonDeliveryHistory.Text = "История поставок";
-            buttonDeliveryHistory.UseVisualStyleBackColor = true;
-            buttonDeliveryHistory.Click += buttonDeliveryHistory_Click;
             // 
             // FormMaterialTypes
             // 

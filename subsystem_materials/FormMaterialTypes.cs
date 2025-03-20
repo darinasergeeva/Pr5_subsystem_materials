@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using subsystem_materials.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,8 +46,75 @@ namespace subsystem_materials
 
         private void buttonDeliveryHistory_Click(object sender, EventArgs e)
         {
-            DeliveryHistory history = new DeliveryHistory(); // Создание новой формы
-            history.Show(); // Показать форму перехода
+            DeliveryHistory history = new DeliveryHistory();
+            history.Show();
+        }
+        private void LoadSuppliers()
+        {
+            // Загружаем всех поставщиков из базы данных, сортируя их по имени
+            var suppliers = db.Suppliers.OrderBy(o => o.NameSupplier).ToList();
+
+            // Устанавливаем источник данных для DataGridView, чтобы отобразить список поставщиков
+            this.dataGridViewTypes.DataSource = suppliers;
+        }
+
+        private void buttonTypeAdd_Click(object sender, EventArgs e)
+        {
+            using (FormAdd formAdd = new FormAdd())
+            {
+                DialogResult result = formAdd.ShowDialog(this);
+
+                // Если пользователь нажал "Отмена", выходим из метода
+                if (result == DialogResult.Cancel)
+                    return;
+
+                // Проверяем, заполнены ли обязательные поля
+                if (string.IsNullOrWhiteSpace(formAdd.textBoxName.Text) ||
+                    string.IsNullOrWhiteSpace(formAdd.textBoxTin.Text) ||
+                    string.IsNullOrWhiteSpace(formAdd.textBoxTypeofSupplier.Text))
+                {
+                    // Если хотя бы одно поле пустое, выводим сообщение об ошибке
+                    MessageBox.Show("Ошибка! Все поля должны быть заполнены.");
+                    return; // Выходим из метода
+                }
+
+                try
+                {
+                    // Преобразуем текст из поля типа поставщика в целое число
+                    int supplierTypeId = int.Parse(formAdd.textBoxTypeofSupplier.Text);
+
+                    // Создаем новый объект Supplier и заполняем его свойства
+                    Supplier supplier = new Supplier
+                    {
+                        NameSupplier = formAdd.textBoxName.Text, // Имя поставщика
+                        Inn = formAdd.textBoxTin.Text, // ИНН поставщика
+                        IdSupplierType = (short)supplierTypeId, // Идентификатор типа поставщика, преобразованный в short
+                        IsActive = formAdd.IsCurrentChecked // Статус активности, полученный из CheckBox
+                    };
+
+                    // Добавляем нового поставщика в контекст базы данных
+                    db.Suppliers.Add(supplier);
+                    // Сохраняем изменения в базе данных
+                    db.SaveChanges();
+                    // Выводим сообщение об успешном добавлении
+                    MessageBox.Show("Новый поставщик добавлен");
+
+                    // Обновляем список поставщиков в DataGridView
+                    LoadSuppliers();
+                }
+                catch (FormatException ex)
+                {
+                    // Если произошла ошибка преобразования, выводим сообщение об ошибке
+                    MessageBox.Show("Ошибка! Поля 'Тип поставщика' должны содержать только числа.");
+                }
+            }
+        }
+
+        private void buttonTypeUpdate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
+
+
